@@ -9,7 +9,7 @@ public class Geometry {
         var integer_1 = 5d;
         System.out.println("Площадь квадрата со стороной " + integer_1 + " = " +(integer_1*integer_1));
 
-        Square.printSquareArea(6);
+        Square.printSquareArea(new Square(6));
 
         Rectangle.printRectangleArea(3.0,5.0);
     }

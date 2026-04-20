@@ -1,3 +1,5 @@
+import java.io.File;
+
 public class Hello {
     private static String Hello = "Hello, world!";
 
@@ -10,5 +12,9 @@ public class Hello {
         System.out.println("Hello" + ", " + "world"+"!");
         //Интересно...
         System.out.println("2+2="+2+2);
+
+        var configFile = new File("sandbox/build.gradle");
+        System.out.println(configFile.getAbsolutePath());
+        System.out.println(configFile.exists());
     }
 }
