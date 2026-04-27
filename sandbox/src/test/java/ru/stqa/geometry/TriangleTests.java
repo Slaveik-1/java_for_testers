@@ -30,4 +30,35 @@ public class TriangleTests {
         System.out.println("Периметр треугольника "+t.getPerimeter());
         Assertions.assertEquals(r,t.getPerimeter(), 0.01,"Периметр не равен");
     }
+
+    @ParameterizedTest //Тест выбрасывания исключения при отрицательной длине сторон(ы) треугольника
+    @CsvSource({
+            "-3, 4, 5", // просто красивый...
+            "-13, -13, 10",// Равнобедренный
+            "-3, -3, -3" //Равносторонний
+    })
+    void cannotCreateTriangleWithNegativeSide(double a, double b, double c){
+        try {
+            new Triangle(a,b,c);
+            Assertions.fail();
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @ParameterizedTest //Тест на выбрасывания исключения при нарушение неравенства треугольника
+    @CsvSource({
+            "3, 4, 10", // просто красивый...
+            "13, 13, 27",// Равнобедренный
+            "3, 3, 9" //Равносторонний
+    })
+    void cannotCreateTriangleIfInequalityViolated(double a, double b, double c){
+        try {
+            new Triangle(a,b,c);
+            Assertions.fail();
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
