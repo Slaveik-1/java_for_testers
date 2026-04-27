@@ -11,6 +11,9 @@ public class SquareTests {
         var s = new Square(5.0);
         var result = s.Area();
         Assertions.assertEquals(25.0,result,"Ну не получилось");
+//        if (result!=25.0){
+//            throw new AssertionError(String.format("Expected %f, actual %f", 25.0,result));
+//        }
 
     }
 
@@ -18,4 +21,16 @@ public class SquareTests {
     void canCalculatePerimeter(){
         Assertions.assertEquals(20.0,new Square(5.0).perimeter());
     }
+
+    @Test
+    void cannotCreateSquareWithNegativeSide(){
+        try {
+            new Square(-5.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 }
