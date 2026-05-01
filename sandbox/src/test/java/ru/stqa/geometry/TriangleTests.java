@@ -61,4 +61,21 @@ public class TriangleTests {
         }
     }
 
+
+    @ParameterizedTest //Тест на выбрасывания исключения при нарушение неравенства треугольника
+    @CsvSource({
+            "3, 4, 5, 5, 4, 3",
+            "4, 5, 3, 5, 3, 4",
+            "5, 4, 3, 3, 5, 4"
+    })
+    void CreateTriangleWithDifferentOrderOfSides (double a, double b, double c, double d, double e, double f){
+        try {
+           var t1 = new Triangle(a,b,c);
+           var t2 = new Triangle(d,e,f);
+            Assertions.assertEquals(t1,t2,"Triangle не равны (");
+        } catch (IllegalArgumentException o){
+            System.out.println(o.getMessage());
+        }
+    }
+
 }
