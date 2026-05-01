@@ -5,10 +5,10 @@ import ru.stqa.mathF.MathFunctions;
 public record Triangle(double a, double b, double c) {
 
     public Triangle {
-        if ((a<0|b<0|c<0)){
+        if ((a<0||b<0||c<0)){
             throw new IllegalArgumentException("Triangle cannot have a side with a negative value.");
         }
-        if ((a+b<c|a+c<b|b+c<a)){
+        if ((a+b<c||a+c<b||b+c<a)){
             throw new IllegalArgumentException("One side cannot be greater than the sum of the other two.");
         }
     }
