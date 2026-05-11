@@ -10,7 +10,7 @@ public class LoginHelper extends HelperBase
         super(manager);
     }
 
-
+//Метод авторизации
     void login(String user, String pass) {
         type(By.name("user"),user);
         type(By.name("pass"),pass);

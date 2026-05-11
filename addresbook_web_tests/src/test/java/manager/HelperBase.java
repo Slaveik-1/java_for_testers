@@ -3,6 +3,9 @@ package manager;
 import org.openqa.selenium.By;
 
 public class HelperBase{
+
+    //Базовый хелпер 
+
     protected final ApplicationManager manager;
 
     public HelperBase(ApplicationManager manager) {

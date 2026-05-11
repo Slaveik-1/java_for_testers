@@ -13,13 +13,14 @@ public class ApplicationManager {
     private LoginHelper session;
     private GroupHelper groupHelper;
 
+    //Ленивая инициализация LoginHelper
     public LoginHelper session() {
         if (session == null) {
             session = new LoginHelper(this);
         }
         return session ;
     }
-
+    //Ленивая инициализация GroupHelper
     public GroupHelper groupHelper(){
         if (groupHelper == null){
             groupHelper = new GroupHelper(this);
@@ -27,7 +28,7 @@ public class ApplicationManager {
         return groupHelper;
     }
 
-
+    //init...(выбор браузера/остановка сессии/стартовая страница)
     public void init(String browser) {
         if (driver == null) {
             if ("firefox".equals(browser)){

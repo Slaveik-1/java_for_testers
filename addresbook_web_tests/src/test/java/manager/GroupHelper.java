@@ -8,7 +8,7 @@ public class GroupHelper extends HelperBase {
     public GroupHelper(ApplicationManager manager){
         super(manager);
     }
-
+// Методы взаимодействия с группой
     public void createGroup(GroupData group) {
         openGroupsPage();
         initGroupCreation();
