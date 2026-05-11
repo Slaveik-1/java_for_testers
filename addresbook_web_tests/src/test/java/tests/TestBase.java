@@ -14,7 +14,7 @@ public class TestBase {
         if(app == null){
             app = new ApplicationManager();
         }
-        //Заве
+        //Завершение
         app.init(System.getProperty("browser","firefox"));
     }
 

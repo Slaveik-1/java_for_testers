@@ -12,6 +12,7 @@ public class ApplicationManager {
     protected WebDriver driver;
     private LoginHelper session;
     private GroupHelper groupHelper;
+    private ContactHelper contactHelper;
 
     //Ленивая инициализация LoginHelper
     public LoginHelper session() {
@@ -27,6 +28,14 @@ public class ApplicationManager {
         }
         return groupHelper;
     }
+
+    public ContactHelper contactHelper(){
+        if (contactHelper == null){
+            contactHelper = new ContactHelper(this);
+        }
+        return contactHelper;
+    }
+
 
     //init...(выбор браузера/остановка сессии/стартовая страница)
     public void init(String browser) {

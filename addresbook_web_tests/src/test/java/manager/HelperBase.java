@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 public class HelperBase{
 
-    //Базовый хелпер 
+    //Базовый хелпер
 
     protected final ApplicationManager manager;
 
@@ -20,5 +20,10 @@ public class HelperBase{
 
     protected void click(By locator) {
         manager.driver.findElement(locator).click();
+    }
+
+    protected void typeS(By locator, String text) {
+        click(locator);
+        manager.driver.findElement(locator).sendKeys(text);
     }
 }
