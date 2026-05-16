@@ -1,6 +1,7 @@
 package tests.Group;
 
 import model.GroupData;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
@@ -14,7 +15,10 @@ public class GroupCreationTests extends TestBase {
 
     @Test
     public void canCreateGroupWithEmptyName() {
+        int groupCount = app.groupHelper().getCount();
         app.groupHelper().createGroup(new GroupData());
+        int newGroupCount = app.groupHelper().getCount();
+        Assertions.assertEquals(groupCount+1,newGroupCount);
     }
 
     @Test
