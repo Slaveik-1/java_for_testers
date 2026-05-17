@@ -20,12 +20,15 @@ public class TestBase {
         app.init(System.getProperty("browser","firefox"));
     }
 
-    public String randomString(int n){
+    public static String randomString(int n){
         var r = new Random();
         var result = "";
         for (int i =0;i<n;i++){
             result = result+(char)('a'+r.nextInt(26/*33*/));
         }
+//        if (n<5){
+//            result = result+ '\'';
+//        }
         return result;
     }
 }
