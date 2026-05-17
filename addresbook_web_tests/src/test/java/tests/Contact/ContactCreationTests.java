@@ -43,7 +43,7 @@ public class ContactCreationTests extends TestBase {
 
     @ParameterizedTest
     @MethodSource("contactProvider")
-    public void canCreateMultipleContactFIO(ContactData contact){
+        public void canCreateMultipleContactFIO(ContactData contact){
         int contactCount = app.contactHelper().getContactCount();
         app.contactHelper().createContact(contact);
         int newContact = app.contactHelper().getContactCount();
