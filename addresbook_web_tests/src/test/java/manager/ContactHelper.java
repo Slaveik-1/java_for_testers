@@ -80,4 +80,8 @@ public class ContactHelper extends HelperBase{
             return manager.isElementPresent(By.name("selected[]"));
     }
 
+    public int getContactCount(){
+        openHomePage();
+        return manager.driver.findElements(By.name("selected[]")).size();
+    }
 }
