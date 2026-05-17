@@ -38,4 +38,15 @@ public class GroupCreationTests extends TestBase {
         app.groupHelper().createGroup(new GroupData().withFooter("some footer"));
     }
 
+    @Test
+    public void canCreateMultipleGroups() {
+        int n=5;
+        int groupCount = app.groupHelper().getCount();
+        for (int i=0;i<n;i++) {
+            app.groupHelper().createGroup(new GroupData(randomString(i+1    ), randomString(i+i), randomString(i+i+i)));
+        }
+        int newGroupCount = app.groupHelper().getCount();
+        Assertions.assertEquals(groupCount+n,newGroupCount);
+    }
+
 }
