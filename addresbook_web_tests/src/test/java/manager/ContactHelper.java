@@ -40,6 +40,27 @@ public class ContactHelper extends HelperBase{
         returnToHomePage();
     }
 
+    public void modifContact(ContactData conactD, ContactData modif){
+        openHomePage();
+        selectContactToEdit(conactD);
+        fillContactForm(modif);
+        submitContactUpdate();
+        returnToHomePage();
+    }
+
+    private void fillContactForm(ContactData contact) {
+        type(By.name("firstname"),contact.Firstname());
+        type(By.name("middlename"),contact.Middlename());
+        type(By.name("lastname"),contact.Lastname());
+    }
+
+    private void submitContactUpdate() {
+        click(By.name("update"));
+    }
+
+    private void selectContactToEdit(ContactData conactD) {
+        click(By.cssSelector(String.format("a[href*='edit.php?id=%s']", conactD.id())));    }
+
     private void selectContact(ContactData conactD) {
         click(By.cssSelector(String.format("input[value='%s']", conactD.id())));    }
 
