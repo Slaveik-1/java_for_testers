@@ -33,7 +33,7 @@ public class ContactCreationTests extends TestBase {
         var emptyContact = new ContactData()
                 .withFirstname("Пипяу")
                 .withLastname("Пипяуов")
-                .withPhoto("src/test/resources/images/avatar.png");
+                .withPhoto(randomFile("src/test/resources/images"));
         app.contactHelper().createContact(emptyContact);
     }
 
