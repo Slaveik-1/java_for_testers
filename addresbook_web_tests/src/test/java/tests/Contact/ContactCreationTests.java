@@ -1,5 +1,6 @@
 package tests.Contact;
 
+import common.Common;
 import model.ContactData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class ContactCreationTests extends TestBase {
          //   }
         }
         for (int i=0;i<5;i++) {
-            result.add(new ContactData().withNames(randomString(i*10),/*randomString(i*10),*/randomString(i*10)));
+            result.add(new ContactData().withNames(Common.randomString(i*10),/*randomString(i*10),*/Common.randomString(i*10)));
         }
         return result;
     }
