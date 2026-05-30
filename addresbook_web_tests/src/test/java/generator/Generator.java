@@ -2,7 +2,9 @@ package generator;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import common.Common;
+import model.ContactData;
 import model.GroupData;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.SerializationFeature;
@@ -65,7 +67,13 @@ public class Generator {
     }
 
     private Object generatorContacts() {
-        return null;
+        var result = new ArrayList<ContactData>();
+        for (int i=0;i<count;i++) {
+            result.add(new ContactData()
+                    .withFirstname(Common.randomString(i*10))
+                    .withLastname(Common.randomString(i*10)));
+        }
+        return result;
     }
 
     private void save(Object data) throws IOException {
@@ -78,7 +86,9 @@ public class Generator {
                 writer.write(json);
             }
 //            writer.close();
+        } if ("yaml".equals(format)){
+            var mapper = new YAMLMapper();
+            mapper.writeValue(new File(output),data);
         } else throw new IllegalArgumentException("Неизвестный формат" + format);
     }
-
 }
