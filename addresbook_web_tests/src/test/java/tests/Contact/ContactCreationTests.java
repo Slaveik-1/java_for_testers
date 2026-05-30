@@ -30,7 +30,7 @@ public class ContactCreationTests extends TestBase {
 //         //   }
 //        }
         var json = "";
-        try (var reader = new FileReader("groups.json");
+        try (var reader = new FileReader("contacts.json");
              var breader = new BufferedReader(reader)
         ) {
             var line =  breader.readLine();
@@ -39,9 +39,6 @@ public class ContactCreationTests extends TestBase {
                 line=breader.readLine();
             }
         }
-//        for (int i=0;i<5;i++) {
-//            result.add(new ContactData().withNames(Common.randomString(i*10),/*randomString(i*10),*/Common.randomString(i*10)));
-//        }
         ObjectMapper mapper = new ObjectMapper();
         var value = mapper.readValue(json,  new TypeReference<List<ContactData>>(){});
         result.addAll(value);
