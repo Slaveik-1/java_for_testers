@@ -9,6 +9,7 @@ import model.GroupData;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
 import java.io.FileReader;
@@ -89,6 +90,10 @@ public class Generator {
         } if ("yaml".equals(format)){
             var mapper = new YAMLMapper();
             mapper.writeValue(new File(output),data);
-        } else throw new IllegalArgumentException("Неизвестный формат" + format);
+        }
+        if ("xml".equals(format)){
+            var mapper = new XmlMapper();
+            mapper.writeValue(new File(output),data);
+        }else throw new IllegalArgumentException("Неизвестный формат" + format);
     }
 }
