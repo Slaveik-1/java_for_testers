@@ -27,6 +27,10 @@ public class ContactRecord {
     public String email3 = "";
     public String homepage = "";
 
+    public ContactRecord(){
+
+    }
+
     public ContactRecord(int id, String firstname, String lastname) {
         this.id = id;
         this.firstname = firstname;
