@@ -16,6 +16,7 @@ public class ApplicationManager {
     private GroupHelper groupHelper;
     private ContactHelper contactHelper;
     private Properties properties;
+    private JdbcHelper jdbcHelper;
 
     //Ленивая инициализация LoginHelper
     public LoginHelper session() {
@@ -37,6 +38,13 @@ public class ApplicationManager {
             contactHelper = new ContactHelper(this);
         }
         return contactHelper;
+    }
+
+    public JdbcHelper jdbcHelper(){
+        if (jdbcHelper == null){
+            jdbcHelper = new JdbcHelper(this);
+        }
+        return jdbcHelper;
     }
 
 
