@@ -99,7 +99,7 @@ public class GroupCreationTests extends TestBase {
     @ParameterizedTest
     @MethodSource("singleRandomGroup")
     public void canCreateSingleGroups(GroupData group) {
-        var oldGroups = app.jdbcHelper().getGroupList();
+        var oldGroups = app.hbm().getGroupList();
         app.groupHelper().createGroup(group);
         var newGroups = app.jdbcHelper().getGroupList();
         Comparator<GroupData> compareById = (o1, o2) -> {
