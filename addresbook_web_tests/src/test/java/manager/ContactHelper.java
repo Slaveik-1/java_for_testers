@@ -1,7 +1,9 @@
 package manager;
 
 import model.ContactData;
+import model.GroupData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,19 @@ public class ContactHelper extends HelperBase{
         setBirthday();
         submitContactCreation();
         returnToHomePage();
+    }
+
+    public void create(ContactData conactD, GroupData group){
+        openContactPage();
+        setContact(conactD);
+        setBirthday();
+        selectGroup(group);
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    public void selectGroup(GroupData group) {
+        new Select(manager.driver.findElement(By.name("new_group"))).selectByValue(group.id());
     }
 
     //Можно вынести в параметры и обернуть в tryCatch

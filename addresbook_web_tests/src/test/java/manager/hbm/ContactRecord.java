@@ -13,19 +13,7 @@ public class ContactRecord {
     public int id;
     public String firstname;
     public String lastname;
-    public String middlename = "";
-    public String nickname = "";
-    public String company = "";
-    public String title = "";
-    public String address = "";
-    public String home = "";
-    public String mobile = "";
-    public String work = "";
-    public String fax = "";
-    public String email = "";
-    public String email2 = "";
-    public String email3 = "";
-    public String homepage = "";
+
 
     public ContactRecord(){
 

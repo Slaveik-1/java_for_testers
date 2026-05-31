@@ -49,4 +49,10 @@ public record ContactData(String id, String Firstname, String Middlename, String
                 this.Work, this.EmailOne, this.EmailTwo,
                 this.EmailThree, this.Homepage);
     }
+
+    public ContactData withIdName(String Id, String Firstname, String Lastname){
+        return new ContactData(Id, Firstname, this.Middlename, Lastname, this.Nickname, this.Photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
+                this.Work, this.EmailOne, this.EmailTwo,
+                this.EmailThree, this.Homepage);
+    }
 }
