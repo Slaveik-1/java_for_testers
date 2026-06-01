@@ -101,7 +101,7 @@ public class GroupCreationTests extends TestBase {
     public void canCreateSingleGroups(GroupData group) {
         var oldGroups = app.hbm().getGroupList();
         app.groupHelper().createGroup(group);
-        var newGroups = app.jdbcHelper().getGroupList();
+        var newGroups = app.hbm().getGroupList();
         Comparator<GroupData> compareById = (o1, o2) -> {
             return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
         };
@@ -122,9 +122,9 @@ public class GroupCreationTests extends TestBase {
     @ParameterizedTest
     @MethodSource("groupProvider")
     public void canCreateMultipleGroups(GroupData group) {
-        var oldGroups = app.groupHelper().getList();
+        var oldGroups = app.hbm().getGroupList();
         app.groupHelper().createGroup(group);
-        var newGroups = app.groupHelper().getList();
+        var newGroups = app.hbm().getGroupList();
         Comparator<GroupData> compareById = (o1, o2) -> {
             return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
         };
@@ -138,9 +138,9 @@ public class GroupCreationTests extends TestBase {
     @ParameterizedTest
     @MethodSource("negativeGroupProvider")
     public void canNotCreateGroup(GroupData name) {
-        var oldGroups = app.groupHelper().getList();
+        var oldGroups = app.hbm().getGroupList();
         app.groupHelper().createGroup(name);
-        var newGroups = app.groupHelper().getList();
+        var newGroups = app.hbm().getGroupList();
         Assertions.assertEquals(newGroups,oldGroups);
     }
 

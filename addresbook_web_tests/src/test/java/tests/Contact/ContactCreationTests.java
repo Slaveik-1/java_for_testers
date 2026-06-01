@@ -22,13 +22,7 @@ public class ContactCreationTests extends TestBase {
 
     public static List<ContactData> contactProvider() throws IOException {
         var result = new ArrayList<ContactData>();
-//        for (var Firstname :List.of("","Пипяу")) {
-//            //    for (var Middlename : List.of("", "Пипяуович")) {
-//                for (var Lastname : List.of("", "Пипяуов")) {
-//                    result.add(new ContactData().withNames(Firstname,/*Middlename,*/Lastname));
-//                }
-//         //   }
-//        }
+
         var json = "";
         try (var reader = new FileReader("contacts.json");
              var breader = new BufferedReader(reader)
@@ -64,16 +58,19 @@ public class ContactCreationTests extends TestBase {
     @ParameterizedTest
     @MethodSource("contactProvider")
         public void canCreateMultipleContactFIO(ContactData contact){
-        var oldContact = app.contactHelper().getList();
+        var oldContact = app.hbm().getContactList();
         app.contactHelper().createContact(contact);
-        var newContact = app.contactHelper().getList();
+        var newContact = app.hbm().getContactList();
         Comparator<ContactData> compareById = (o1, o2) -> {
             return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
         };
+
         newContact.sort(compareById);
+
         var expectedList = new ArrayList<>(oldContact);
         expectedList.add(contact.withId(newContact.get(newContact.size()-1).id()));
         expectedList.sort(compareById);
+
         Assertions.assertEquals(newContact, expectedList);
     }
 
@@ -82,16 +79,28 @@ public class ContactCreationTests extends TestBase {
         var contact = new ContactData()
                 .withFirstname(Common.randomString(10))
                 .withLastname(Common.randomString(10))
-                .withPhoto(randomFile("src/test/resources/images"));
+                /* .withPhoto(randomFile("src/test/resources/images"))*/;
         if(app.hbm().getGroupCount() == 0){
             app.hbm().createGroup(new GroupData("", "group name", "header", "footer"));
         }
+
         var group = app.hbm().getGroupList().get(0);
 
         var oldRelated = app.hbm().getContactsInGroup(group);
         app.contactHelper().create(contact, group);
         var newRelated = app.hbm().getContactsInGroup(group);
-        Assertions.assertEquals(oldRelated.size()+1,newRelated.size());
+        Comparator<ContactData> compareById = (o1, o2) -> {
+            return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+        };
+        newRelated.sort(compareById);
+
+        var expectedList = new ArrayList<>(oldRelated);
+        expectedList.add(contact.withId(newRelated.get(newRelated.size() - 1).id()));
+        expectedList.sort(compareById);
+
+
+        Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
+        Assertions.assertEquals(newRelated, expectedList);
     }
 
 }

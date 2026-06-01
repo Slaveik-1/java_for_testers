@@ -17,11 +17,11 @@ public class ContactRemovalTest extends TestBase {
             var contactFIO = emptyContact.withFIO("Пипяу","Пипяуович","Пипяуов");
             app.contactHelper().createContact(contactFIO);
         }
-        var oldContact = app.contactHelper().getList();
+        var oldContact = app.hbm().getContactList();
         var rnd = new Random();
         var index = rnd.nextInt(oldContact.size());
         app.contactHelper().removalContact(oldContact.get(index));
-        var newContact = app.contactHelper().getList();
+        var newContact =app.hbm().getContactList();
         var expectedList = new ArrayList<>(oldContact);
         expectedList.remove(index);
         Assertions.assertEquals(newContact,expectedList);
