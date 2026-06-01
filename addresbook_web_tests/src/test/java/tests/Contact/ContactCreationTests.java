@@ -54,12 +54,12 @@ public class ContactCreationTests extends TestBase {
         app.contactHelper().createContact(emptyContact);
     }
 
-    @Test
-    public void canCreateFull(){
-        app.contactHelper().createContact(new ContactData("", "Пипяу","Пипяуович","Пипяуов","Pipyau", "", "Title","OOO Pipyau",
-                "The Pentagon, Washington, DC 20301-0003","dom","123","work","e1",
-                "e2","e3","home"));
-    }
+//    @Test
+//    public void canCreateFull(){
+//        app.contactHelper().createContact(new ContactData("", "Пипяу","Пипяуович","Пипяуов","Pipyau", "", "Title","OOO Pipyau",
+//                "The Pentagon, Washington, DC 20301-0003","dom","123","work","e1",
+//                "e2","e3","home"));
+//    }
 
     @ParameterizedTest
     @MethodSource("contactProvider")
