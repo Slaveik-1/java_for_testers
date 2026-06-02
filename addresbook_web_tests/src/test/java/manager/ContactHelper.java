@@ -3,10 +3,12 @@ package manager;
 import model.ContactData;
 import model.GroupData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ContactHelper extends HelperBase{
 
@@ -22,6 +24,19 @@ public class ContactHelper extends HelperBase{
         returnToHomePage();
     }
 
+    public void addToGroupContact(ContactData s, GroupData group){
+        openHomePage();
+        selectOnlyNonGroup();
+        selectContact(s);
+        selectAddGroup(group);
+        addToGroup();
+        openHomePage();
+    }
+
+    private void selectCheckbox() {
+        click(By.xpath("//input[@type='checkbox' and @id!='MassCB']"));
+    }
+
     public void create(ContactData conactD, GroupData group){
         openContactPage();
         setContact(conactD);
@@ -33,6 +48,19 @@ public class ContactHelper extends HelperBase{
 
     public void selectGroup(GroupData group) {
         new Select(manager.driver.findElement(By.name("new_group"))).selectByValue(group.id());
+    }
+
+    public void a (){
+        openHomePage();
+        selectOnlyNonGroup();
+    }
+
+    public List<WebElement> checkboxes() {
+        return manager.driver.findElements(By.xpath("//input[@type='checkbox' and @id!='MassCB']"));
+    }
+
+    public void selectOnlyNonGroup() {
+        new Select(manager.driver.findElement(By.name("group"))).selectByValue("[none]");
     }
 
     //Можно вынести в параметры и обернуть в tryCatch
@@ -78,6 +106,9 @@ public class ContactHelper extends HelperBase{
 
     private void selectContact(ContactData conactD) {
         click(By.cssSelector(String.format("input[value='%s']", conactD.id())));    }
+
+    private void selectContactStr(String conact) {
+        click(By.cssSelector(String.format("input[value='%s']", Integer.parseInt(conact))));    }
 
     private void selectAllContact() {
         var checkboxes = manager.driver.findElements(By.name("selected[]"));
@@ -139,6 +170,14 @@ public class ContactHelper extends HelperBase{
         return manager.driver.findElements(By.name("selected[]")).size();
     }
 
+    private void selectAddGroup(GroupData group) {
+        click(By.cssSelector(String.format("select[name='to_group'] option[value='%s']", group.id())));
+    }
+
+    private void addToGroup() {
+        click(By.name("add"));
+    }
+
     public List<ContactData> getList(){
         openHomePage();
         var contacts = new ArrayList<ContactData>();
@@ -153,4 +192,35 @@ public class ContactHelper extends HelperBase{
         return contacts;
     }
 
+    public List<String> getNonGroupList(){
+        openHomePage();
+        selectOnlyNonGroup();
+        List<WebElement> elements = manager.driver.findElements(By.xpath("//input[@type='checkbox' and @id!='MassCB']"));
+        return elements.stream()
+                .map(el -> el.getAttribute("id"))
+                .filter(id -> id != null && !id.isEmpty())
+                .collect(Collectors.toList());
+//        for (var a : elements){
+//            var id = a.getAttribute("id");
+//            contacts.add()
+        }
+
+    public void RemoveGroupFromContact(ContactData contact, GroupData group) {
+        openHomePage();
+        selectGroupFilter(group);
+        selectContact(contact);
+        removeFromGroup();
+        openHomePage();
+    }
+
+    private void selectGroupFilter(GroupData group) {
+        click(By.cssSelector(String.format("select[name='group'] option[value='%s']", group.id())));
+    }
+
+    private void removeFromGroup() {
+        click(By.name("remove"));
+    }
 }
+
+
+
