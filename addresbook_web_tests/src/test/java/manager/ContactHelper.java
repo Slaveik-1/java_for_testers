@@ -205,7 +205,7 @@ public class ContactHelper extends HelperBase{
 //            contacts.add()
         }
 
-    public void RemoveGroupFromContact(ContactData contact, GroupData group) {
+    public void removeGroupFromContact(ContactData contact, GroupData group) {
         openHomePage();
         selectGroupFilter(group);
         selectContact(contact);

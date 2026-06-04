@@ -219,7 +219,7 @@ public class ContactCreationTests extends TestBase {
             oldContacts = app.hbm().getContactsInGroup(group);
         }
         var contact = oldContacts.get(rnd.nextInt(oldContacts.size()));
-        app.contactHelper().RemoveGroupFromContact(contact, group);
+        app.contactHelper().removeGroupFromContact(contact, group);
 
         var newContacts = app.hbm().getContactsInGroup(group);
 
