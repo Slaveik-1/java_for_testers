@@ -9,9 +9,16 @@ public record Square(double side) {
     }
 
     public static void printSquareArea(Square s){
-        System.out.println("Площадь квадрата со стороной " + s.side + " = " + s.Area());
+       // System.out.println("Площадь квадрата со стороной " + s.side + " = " + s.Area());
         System.out.println(String.format(
                 "Площадь квадрата со стороной %f = %f", s.side, s.Area()
+        ));
+    }
+
+    public static void printSquarePer(Square s){
+        // System.out.println("Периметр квадрата со стороной " + s.side + " = " + s.Area());
+        System.out.println(String.format(
+                "Периметр квадрата со стороной %f = %f", s.side, s.perimeter()
         ));
     }
 

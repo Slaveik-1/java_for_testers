@@ -16,6 +16,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Generator {
 
@@ -56,25 +59,27 @@ public class Generator {
         }
     }
 
-    private Object generatorGroups() {
-        var result = new ArrayList<GroupData>();
+    private Object generateData(Supplier<Object> dataSupplier) {
+        Stream.generate(dataSupplier).limit(count).collect(Collectors.toList());
+        var result = new ArrayList<Object>();
         for (int i=0;i<count;i++) {
-            result.add(new GroupData()
-                    .withName(Common.randomString(i*10))
-                    .withHeader(Common.randomString(i*10))
-                    .withFooter(Common.randomString(i*10)));
+            result.add(dataSupplier.get());
         }
         return result;
     }
 
+    private Object generatorGroups() {
+        return generateData(()-> new GroupData()
+                .withName(Common.randomString(10))
+                .withHeader(Common.randomString(10))
+                .withFooter(Common.randomString(10)));
+    }
+
     private Object generatorContacts() {
-        var result = new ArrayList<ContactData>();
-        for (int i=0;i<count;i++) {
-            result.add(new ContactData()
-                    .withFirstname(Common.randomString(i*10))
-                    .withLastname(Common.randomString(i*10)));
-        }
-        return result;
+        return generateData(()->new ContactData()
+                        .withFirstname(Common.randomString(10))
+                        .withLastname(Common.randomString(10)));
+
     }
 
     private void save(Object data) throws IOException {
