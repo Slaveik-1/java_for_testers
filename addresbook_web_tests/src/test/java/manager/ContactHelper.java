@@ -220,6 +220,12 @@ public class ContactHelper extends HelperBase{
     private void removeFromGroup() {
         click(By.name("remove"));
     }
+
+    public Object getPhones(ContactData contact) {
+      return   manager.driver.findElement(By.xpath(
+                String.format("//input[@id='%s']/../../td[6]", contact.id()))).getText();
+
+    }
 }
 
 

@@ -107,7 +107,7 @@ public class GroupCreationTests extends TestBase {
         var oldGroups = app.hbm().getGroupList();
         app.groupHelper().createGroup(group);
         var newGroups = app.hbm().getGroupList();
-        
+
         var extraGroups = newGroups.stream().filter(g->!oldGroups.contains(g)).toList();
         var newId = extraGroups.get(0).id();
         var expectedList = new ArrayList<>(oldGroups);
