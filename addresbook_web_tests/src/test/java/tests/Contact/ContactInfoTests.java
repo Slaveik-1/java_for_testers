@@ -22,12 +22,14 @@ public class ContactInfoTests extends TestBase {
             app.contactHelper().createContact(contactFIO);
         }
         var contacts = app.hbm().getContactList();
-        var contact = contacts.get(0);
-        var phones = app.contactHelper().getPhones(contact);
-        var expected = Stream.of(contact.Home(),contact.Mobile(),contact.Work())
-                .filter(s-> s!=null &&!"".equals(s))
-                .collect(Collectors.joining("\n"));
-        Assertions.assertEquals(expected,phones);
+        var expected = contacts.stream().collect(Collectors.toMap(ContactData::id, contact->
+                Stream.of(contact.Home(),contact.Mobile(),contact.Work())
+                        .filter(s-> s!=null &&!"".equals(s))
+                        .collect(Collectors.joining("\n"))
+        ));
+        var phones = app.contactHelper().getPhones();
+            Assertions.assertEquals(expected,phones);
+        }
     }
 
-}
+
