@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HibernateHelper extends HelperBase{
+public class HibernateHelper extends HelperBase {
 
     private SessionFactory sessionFactory;
 
@@ -28,8 +28,8 @@ public class HibernateHelper extends HelperBase{
                 .buildSessionFactory();
     }
 
-    static List<GroupData> convertedList(List<GroupRecord> records){
-        return  records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
+    static List<GroupData> convertedList(List<GroupRecord> records) {
+        return records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
     }
 
     private static GroupData convert(GroupRecord record) {
@@ -38,21 +38,21 @@ public class HibernateHelper extends HelperBase{
 
     private static GroupRecord convert(GroupData data) {
         var id = data.id();
-        if ("".equals(id)){
-            id="0";
+        if ("".equals(id)) {
+            id = "0";
         }
-        return new GroupRecord(Integer.parseInt(id) , data.name(), data.header(), data.footer());
+        return new GroupRecord(Integer.parseInt(id), data.name(), data.header(), data.footer());
     }
 
-        public List<GroupData> getGroupList(){
-       return convertedList(sessionFactory.fromSession(session -> {
-            return session.createQuery("from GroupRecord",GroupRecord.class).list();
+    public List<GroupData> getGroupList() {
+        return convertedList(sessionFactory.fromSession(session -> {
+            return session.createQuery("from GroupRecord", GroupRecord.class).list();
         }));
     }
 
     public long getGroupCount() {
         return sessionFactory.fromSession(session -> {
-            return session.createQuery("select count(*) from GroupRecord",Long.class).getSingleResult();
+            return session.createQuery("select count(*) from GroupRecord", Long.class).getSingleResult();
         });
     }
 
@@ -75,7 +75,7 @@ public class HibernateHelper extends HelperBase{
     }
 
     static List<ContactData> convertContactList(List<ContactRecord> records) {
-        return  records.stream().map(HibernateHelper::convertContact).collect(Collectors.toList());
+        return records.stream().map(HibernateHelper::convertContact).collect(Collectors.toList());
     }
 
     private static ContactData convertContact(ContactRecord record) {
@@ -85,7 +85,11 @@ public class HibernateHelper extends HelperBase{
                 .withLastname(record.lastname)
                 .withHome(record.home)
                 .withMobile(record.mobile)
-                .withWork(record.work);
+                .withWork(record.work)
+                .withAddress(record.address)
+                .withEmailOne(record.email)
+                .withEmailTwo(record.email2)
+                .withEmailThree(record.email3);
     }
 
     private static ContactRecord convertContact(ContactData data) {
@@ -96,7 +100,15 @@ public class HibernateHelper extends HelperBase{
         return new ContactRecord(
                 Integer.parseInt(id),
                 data.Firstname(),
-                data.Lastname()
+                data.Lastname(),
+                data.Home(),
+                data.Mobile(),
+                data.Work(),
+                data.Address(),
+                data.EmailOne(),
+                data.EmailTwo(),
+                data.EmailThree()
+
         );
     }
 

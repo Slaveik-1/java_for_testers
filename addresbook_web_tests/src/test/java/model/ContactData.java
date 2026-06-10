@@ -17,18 +17,18 @@ public record ContactData(String id,
                           String EmailThree,
                           String Homepage) {
 
-    public ContactData(){
-        this("", "","","","", "", "","",
-                "","","","","","","","");
+    public ContactData() {
+        this("", "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", "");
     }
 
-    public ContactData withFIO(String Firstname, String Middlename, String Lastname){
+    public ContactData withFIO(String Firstname, String Middlename, String Lastname) {
         return new ContactData(this.id, Firstname, Middlename, Lastname, this.Nickname, this.Photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
                 this.Work, this.EmailOne, this.EmailTwo,
                 this.EmailThree, this.Homepage);
     }
 
-    public ContactData withId(String Id){
+    public ContactData withId(String Id) {
         return new ContactData(Id, Firstname, Middlename, Lastname, this.Nickname, this.Photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
                 this.Work, this.EmailOne, this.EmailTwo,
                 this.EmailThree, this.Homepage);
@@ -45,19 +45,20 @@ public record ContactData(String id,
                 this.Work, this.EmailOne, this.EmailTwo,
                 this.EmailThree, this.Homepage);
     }
-    public ContactData withLastname( String Lastname) {
+
+    public ContactData withLastname(String Lastname) {
         return new ContactData(this.id, this.Firstname, Middlename, Lastname, this.Nickname, this.Photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
                 this.Work, this.EmailOne, this.EmailTwo,
                 this.EmailThree, this.Homepage);
     }
 
-    public ContactData withPhoto(String photo){
+    public ContactData withPhoto(String photo) {
         return new ContactData(this.id, this.Firstname, Middlename, Lastname, this.Nickname, photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
                 this.Work, this.EmailOne, this.EmailTwo,
                 this.EmailThree, this.Homepage);
     }
 
-    public ContactData withIdName(String Id, String Firstname, String Lastname){
+    public ContactData withIdName(String Id, String Firstname, String Lastname) {
         return new ContactData(Id, Firstname, this.Middlename, Lastname, this.Nickname, this.Photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
                 this.Work, this.EmailOne, this.EmailTwo,
                 this.EmailThree, this.Homepage);
@@ -79,6 +80,30 @@ public record ContactData(String id,
         return new ContactData(this.id, this.Firstname, Middlename, Lastname, this.Nickname, this.Photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
                 Work, this.EmailOne, this.EmailTwo,
                 this.EmailThree, this.Homepage);
+    }
+
+    public ContactData withAddress(String Address) {
+        return new ContactData(this.id, this.Firstname, this.Middlename, this.Lastname, this.Nickname, this.Photo, this.Title, this.Company, Address, this.Home, this.Mobile,
+                this.Work, this.EmailOne, this.EmailTwo,
+                this.EmailThree, this.Homepage);
+    }
+
+    public ContactData withEmailOne(String EmailOne) {
+        return new ContactData(this.id, this.Firstname, Middlename, Lastname, this.Nickname, this.Photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
+                this.Work, EmailOne, this.EmailTwo,
+                this.EmailThree, this.Homepage);
+    }
+
+    public ContactData withEmailTwo(String EmailTwo) {
+        return new ContactData(this.id, this.Firstname, Middlename, Lastname, this.Nickname, this.Photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
+                this.Work, this.EmailOne, EmailTwo,
+                this.EmailThree, this.Homepage);
+    }
+
+    public ContactData withEmailThree(String EmailThree) {
+        return new ContactData(this.id, this.Firstname, Middlename, Lastname, this.Nickname, this.Photo, this.Title, this.Company, this.Address, this.Home, this.Mobile,
+                this.Work, this.EmailOne, this.EmailTwo,
+                EmailThree, this.Homepage);
     }
 
 }

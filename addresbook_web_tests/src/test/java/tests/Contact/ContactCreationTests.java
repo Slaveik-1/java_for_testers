@@ -28,20 +28,21 @@ public class ContactCreationTests extends TestBase {
         try (var reader = new FileReader("contacts.json");
              var breader = new BufferedReader(reader)
         ) {
-            var line =  breader.readLine();
-            while (line!= null){
-                json=json+line;
-                line=breader.readLine();
+            var line = breader.readLine();
+            while (line != null) {
+                json = json + line;
+                line = breader.readLine();
             }
         }
         ObjectMapper mapper = new ObjectMapper();
-        var value = mapper.readValue(json,  new TypeReference<List<ContactData>>(){});
+        var value = mapper.readValue(json, new TypeReference<List<ContactData>>() {
+        });
         result.addAll(value);
         return result;
     }
 
     @Test
-    public void canCreateContactFIO(){
+    public void canCreateContactFIO() {
         var emptyContact = new ContactData()
                 .withFirstname("Пипяу")
                 .withLastname("Пипяуов")
@@ -58,7 +59,7 @@ public class ContactCreationTests extends TestBase {
 
     @ParameterizedTest
     @MethodSource("contactProvider")
-        public void canCreateMultipleContactFIO(ContactData contact){
+    public void canCreateMultipleContactFIO(ContactData contact) {
         var oldContact = app.hbm().getContactList();
         app.contactHelper().createContact(contact);
         var newContact = app.hbm().getContactList();
@@ -69,26 +70,26 @@ public class ContactCreationTests extends TestBase {
         newContact.sort(compareById);
 
         var expectedList = new ArrayList<>(oldContact);
-        expectedList.add(contact.withId(newContact.get(newContact.size()-1).id()));
+        expectedList.add(contact.withId(newContact.get(newContact.size() - 1).id()));
         expectedList.sort(compareById);
 
         Assertions.assertEquals(newContact, expectedList);
     }
 
     @Test
-    public void canCreateContactInGroup(){
+    public void canCreateContactInGroup() {
         var contact = new ContactData()
                 .withFirstname(Common.randomString(10))
                 .withLastname(Common.randomString(10))
                 /* .withPhoto(randomFile("src/test/resources/images"))*/;
-        if(app.hbm().getGroupCount() == 0){
+        if (app.hbm().getGroupCount() == 0) {
             app.hbm().createGroup(new GroupData("", "group name", "header", "footer"));
         }
 
         //первая группа всегда - none , буду брать последнюю через костыль (был выбор между stream и кривой костыль я выбрал 2ое
         var maxIndex = app.hbm().getGroupList().size();
         //Для дебага var maxIndex1 = app.hbm().getGroupList();
-        var group = app.hbm().getGroupList().get(maxIndex-1);
+        var group = app.hbm().getGroupList().get(maxIndex - 1);
 
         var oldRelated = app.hbm().getContactsInGroup(group);
         app.contactHelper().create(contact, group);
@@ -107,10 +108,11 @@ public class ContactCreationTests extends TestBase {
         Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
         Assertions.assertEquals(newRelated, expectedList);
     }
+
     @Test
-    public void addContactToGroup(){
+    public void addContactToGroup() {
         app.contactHelper().a();
-        if (app.contactHelper().checkboxes().isEmpty()){
+        if (app.contactHelper().checkboxes().isEmpty()) {
             app.hbm().createContact(new ContactData()
                     .withNames(Common.randomString(10),
                             Common.randomString(10)));
@@ -123,7 +125,7 @@ public class ContactCreationTests extends TestBase {
 //        }
 
         //Есть ли группа
-        if(app.hbm().getGroupCount() == 0){
+        if (app.hbm().getGroupCount() == 0) {
             app.hbm().createGroup(new GroupData("", "group name", "header", "footer"));
         }
 
@@ -147,10 +149,9 @@ public class ContactCreationTests extends TestBase {
                 .orElse(null);
 
 
-
         var maxIndex = app.hbm().getGroupList().size();
         //Выбор последней группы
-        var group = app.hbm().getGroupList().get(maxIndex-1); //жертва
+        var group = app.hbm().getGroupList().get(maxIndex - 1); //жертва
 
         //список контактов в группе до
         var oldRelated = app.hbm().getContactsInGroup(group);
@@ -160,7 +161,6 @@ public class ContactCreationTests extends TestBase {
 
         //список контактов в группе после
         var newRelated = app.hbm().getContactsInGroup(group);
-
 
 
         Comparator<ContactData> compareById = (o1, o2) -> {
