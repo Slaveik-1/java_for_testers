@@ -13,6 +13,7 @@ public class ApplicationManager {
     private String browser;
     private Properties properties;
     private SessionHelper session;
+    private HttpSessionHelper httpSession;
 
 
     //init...(выбор браузера/остановка сессии/стартовая страница)
@@ -48,4 +49,14 @@ public class ApplicationManager {
         return session;
     }
 
+    public HttpSessionHelper http() {
+        if (httpSession==null){
+            httpSession=new HttpSessionHelper(this);
+        }
+        return httpSession;
+    }
+
+    public String getProperties(String name) {
+        return properties.getProperty(name);
+    }
 }
