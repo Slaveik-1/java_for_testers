@@ -21,18 +21,35 @@ public class HttpSessionHelper extends HelperBase{
 
 
     public void login(String username, String pass) {
-        RequestBody formBody = new FormBody.Builder()
+        RequestBody request1FormBody = new FormBody.Builder()
                 .add("username", username)
-                .add("password", pass)
                 .build();
-
-        Request request = new Request.Builder()
-                .url(String.format("%s/login.php",manager.getProperties("web.baseURL")))
-                .post(formBody)
+        Request request1 = new Request.Builder()
+                .url(String.format("%s/login_page.php",manager.getProperties("web.baseURL")))
+                .post(request1FormBody)
                 .build();
+        try (Response response1 = client.newCall(request1).execute()) {
+            if (!response1.isSuccessful()) throw new RuntimeException("Unexpected code " + response1);
+            String body = response1.body().string();
+            String loginTokenPrefix = "<input type=\"hidden\" name=\"login_token\" value=\"";
+            int tokenStart = body.indexOf(loginTokenPrefix) + loginTokenPrefix.length();
+            int tokenEnd = body.indexOf("\"", tokenStart);
+            String token = body.substring(tokenStart, tokenEnd);
 
-        try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()) throw new RuntimeException("Unexpected code " + response);
+            RequestBody request2FormBody = new FormBody.Builder()
+                    .add("login_token", token)
+                    .add("username", username)
+                    .add("password", pass)
+                    .build();
+            Request request2 = new Request.Builder()
+                    .url(String.format("%s/login.php",manager.getProperties("web.baseURL")))
+                    .post(request2FormBody)
+                    .build();
+            try (Response response2 = client.newCall(request2).execute()) {
+                if (!response2.isSuccessful()) throw new RuntimeException("Unexpected code " + response2);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
