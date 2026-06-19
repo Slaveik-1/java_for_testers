@@ -15,6 +15,7 @@ public class ApplicationManager {
     private SessionHelper session;
     private HttpSessionHelper httpSession;
     private JamesCliHelper jamesCliHelper;
+    private MailHelper mail;
 
 
     //init...(выбор браузера/остановка сессии/стартовая страница)
@@ -62,6 +63,13 @@ public class ApplicationManager {
             jamesCliHelper=new JamesCliHelper(this);
         }
         return jamesCliHelper;
+    }
+
+    public MailHelper mail() {
+        if (mail==null){
+            mail=new MailHelper(this);
+        }
+        return mail;
     }
 
     public String getProperties(String name) {
