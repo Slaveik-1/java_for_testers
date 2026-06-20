@@ -16,6 +16,7 @@ public class ApplicationManager {
     private HttpSessionHelper httpSession;
     private JamesCliHelper jamesCliHelper;
     private MailHelper mail;
+    private UiHellper uiHellper;
 
 
     //init...(выбор браузера/остановка сессии/стартовая страница)
@@ -70,6 +71,13 @@ public class ApplicationManager {
             mail=new MailHelper(this);
         }
         return mail;
+    }
+
+    public UiHellper uiHellper() {
+        if (uiHellper==null){
+            uiHellper=new UiHellper(this);
+        }
+        return uiHellper;
     }
 
     public String getProperties(String name) {

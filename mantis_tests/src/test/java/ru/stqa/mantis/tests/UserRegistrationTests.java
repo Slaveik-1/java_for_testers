@@ -26,7 +26,7 @@ public class UserRegistrationTests extends TestBase {
 
         try {
             app.jamesCli().addUser(email, pass);
-            app.http().registrationUser(user, email);
+            app.uiHellper().registrationUser(user, email);
             var message = app.mail().receive(email, pass, Duration.ofSeconds(25));
             Assertions.assertFalse(message.isEmpty(), "No message");
             System.out.println(message);
@@ -34,7 +34,7 @@ public class UserRegistrationTests extends TestBase {
             var url = app.mail().getUrl(message);
             System.out.println(url);
 
-            app.http().finish(url, user, pass);
+            app.uiHellper().finish(url, user, pass);
 
             app.http().login(user, pass);
         } catch (InterruptedException e) {
