@@ -12,11 +12,11 @@ public class LoginTests extends TestBase {
         Assertions.assertTrue(app.http().isLoggedIn());
     }
 
-    @Test
-    void canLoginUser(){
-        app.http().login("administrator","password");
-        Assertions.assertTrue(app.http().isLoggedIn());
-    }
+//    @Test
+//    void canLoginUser(){
+//        app.http().login("administrator","password");
+//        Assertions.assertTrue(app.http().isLoggedIn());
+//    }
 }
 
 

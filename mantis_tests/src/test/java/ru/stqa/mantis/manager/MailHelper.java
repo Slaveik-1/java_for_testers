@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 public class MailHelper extends HelperBase {
     public MailHelper(ApplicationManager manager) {
@@ -82,4 +83,14 @@ public class MailHelper extends HelperBase {
         }
     }
 
+    public String getUrl(List<MailMessage> message) {
+        var text = message.get(0).content();
+        var pattern = Pattern.compile("http://\\S*");
+        var matcher = pattern.matcher(text);
+        if (matcher.find()){
+            return text.substring(matcher.start(),matcher.end());
+
+        }
+        throw new RuntimeException("No url");
+    }
 }
