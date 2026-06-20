@@ -27,6 +27,7 @@ public class UserRegistrationTests extends TestBase {
         try {
             app.jamesCli().addUser(email, pass);
             app.uiHellper().registrationUser(user, email);
+
             var message = app.mail().receive(email, pass, Duration.ofSeconds(25));
             Assertions.assertFalse(message.isEmpty(), "No message");
             System.out.println(message);
@@ -41,4 +42,30 @@ public class UserRegistrationTests extends TestBase {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    void canRegisterUserApi () {
+        var user = Common.randomString(9);
+        var email = (String.format("%s@localhost", Common.randomString(7)));
+        var pass = app.getProperties("pass");
+
+        try {
+            app.jamesApiHelper().addUser(email, pass);
+            app.uiHellper().registrationUser(user, email);
+
+            var message = app.mail().receive(email, pass, Duration.ofSeconds(25));
+            Assertions.assertFalse(message.isEmpty(), "No message");
+            System.out.println(message);
+
+            var url = app.mail().getUrl(message);
+            System.out.println(url);
+
+            app.uiHellper().finish(url, user, pass);
+
+            app.http().login(user, pass);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

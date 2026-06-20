@@ -17,6 +17,7 @@ public class ApplicationManager {
     private JamesCliHelper jamesCliHelper;
     private MailHelper mail;
     private UiHellper uiHellper;
+    private JamesApiHelper jamesApiHelper;
 
 
     //init...(выбор браузера/остановка сессии/стартовая страница)
@@ -78,6 +79,13 @@ public class ApplicationManager {
             uiHellper=new UiHellper(this);
         }
         return uiHellper;
+    }
+
+    public JamesApiHelper jamesApiHelper() {
+        if (jamesApiHelper==null){
+            jamesApiHelper=new JamesApiHelper(this);
+        }
+        return jamesApiHelper;
     }
 
     public String getProperties(String name) {
