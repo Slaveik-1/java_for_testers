@@ -5,6 +5,7 @@ import ru.stqa.mantis.common.Common;
 
 public class asasa extends TestBase {
 
+    //Создание пользака
     @Test
     void canCreateUser() throws InterruptedException {
         app.jamesCli().addUser(String.format("%s@localhost", Common.randomString(7)),"password");
