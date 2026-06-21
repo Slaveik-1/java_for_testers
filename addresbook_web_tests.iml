@@ -5,6 +5,8 @@
     <content url="file://$MODULE_DIR$/addresbook_web_tests">
       <excludeFolder url="file://$MODULE_DIR$/addresbook_web_tests/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/addresbook_web_tests/build" />
+      <excludeFolder url="file://$MODULE_DIR$/addresbook_web_tests/allure-report" />
+      <excludeFolder url="file://$MODULE_DIR$/addresbook_web_tests/allure-results" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
