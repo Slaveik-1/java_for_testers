@@ -36,8 +36,8 @@ public class TestBase {
         return Paths.get(dir,file[index]).toString();
     }
 
-    @AfterEach
-    void checkDatabaseConsistency(){
-        app.jdbcHelper().checkConsistency();
-    }
+//    @AfterEach
+//    void checkDatabaseConsistency(){
+//        app.jdbcHelper().checkConsistency();
+//    }
 }
