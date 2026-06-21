@@ -4,6 +4,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.stqa.mantis.tests.IssueCreationTests;
 
 import java.util.Properties;
 
@@ -18,6 +19,7 @@ public class ApplicationManager {
     private MailHelper mail;
     private UiHellper uiHellper;
     private JamesApiHelper jamesApiHelper;
+    private RestApiHelper rest;
 
 
     //init...(выбор браузера/остановка сессии/стартовая страница)
@@ -88,7 +90,15 @@ public class ApplicationManager {
         return jamesApiHelper;
     }
 
+    public RestApiHelper rest() {
+        if (rest==null){
+            rest=new RestApiHelper(this);
+        }
+        return rest;
+    }
+
     public String getProperties(String name) {
         return properties.getProperty(name);
     }
+
 }
