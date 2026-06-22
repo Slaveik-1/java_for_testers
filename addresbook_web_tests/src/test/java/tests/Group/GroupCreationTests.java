@@ -1,6 +1,7 @@
 package tests.Group;
 
 import common.Common;
+import io.qameta.allure.Allure;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -112,9 +113,9 @@ public class GroupCreationTests extends TestBase {
         var newId = extraGroups.get(0).id();
         var expectedList = new ArrayList<>(oldGroups);
         expectedList.add(group.withId(newId));
-
-        Assertions.assertEquals(Set.copyOf(newGroups),Set.copyOf(expectedList));
-
+        Allure.step("Validation result", stepContext -> {
+                    Assertions.assertEquals(Set.copyOf(newGroups), Set.copyOf(expectedList));
+                });
        // var mewUiGroups = app.groupHelper().getList();
 
     }

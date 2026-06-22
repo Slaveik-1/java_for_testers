@@ -1,6 +1,7 @@
 package tests.Contact;
 
 import common.Common;
+import io.qameta.allure.Allure;
 import model.ContactData;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
@@ -72,8 +73,9 @@ public class ContactCreationTests extends TestBase {
         var expectedList = new ArrayList<>(oldContact);
         expectedList.add(contact.withId(newContact.get(newContact.size() - 1).id()));
         expectedList.sort(compareById);
-
-        Assertions.assertEquals(newContact, expectedList);
+        Allure.step("Validation result", stepContext -> {
+            Assertions.assertEquals(newContact, expectedList);
+        });
     }
 
     @Test
